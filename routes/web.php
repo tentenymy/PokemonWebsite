@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
+
+Auth::routes();
+Route::get('/home', 'HomeController@index');
+//Route::get('poke', 'PokesController@index');
+
+Route::resource('trainers', 'TrainersController');
+Route::resource('pokes', 'PokesController');
