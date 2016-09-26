@@ -11,41 +11,47 @@
                 </div>
             </div>
 
-            <div>
-                <a href="{{url('pokes')}}">Admin</a>
-            </div>
 
             <div>
-                <h3>Trainers and User</h3>
+                <h3>Pokemon</h3>
+                <p>There are {{$pokes->count()}} Pokemon in the system</p>
                 <table>
                     <tr>
+                        <th>Poke_id</th>
                         <th>Name</th>
-                        <th>Hometown</th>
-                        <th>Pokemon</th>
+                        <th>Totle</th>
                         <th>Action</th>
-                        <th>Admin</th>
+                        <th>DetailsS</th>
                     </tr>
-                    @foreach($users as $user)
-                        <tr>
-                            <td>{{$user->name}}</td>
-                            @foreach($user->trainers as $trainer)
-                                @if(!empty($trainer))
-                                    <td>{{$trainer->hometown}}</td>
-                                    <td>{{$trainer->poke->poke_name}}</td>
-                                @else
-                                    <td>N/A</td>
-                                    <td>N/A</td>
-                                @endif
-                                @break
-                            @endforeach
-                            <td>Edit</td>
-                            <td>{{$user->admin}}</td>
-                        </tr>
+                    @foreach($pokes as $poke)
+                    <tr>
+                        <td>{{$poke->id}}</td>
+                        <td>{{$poke->name}}</td>
+                        <td>{{$poke->trainers->count()}}
+                    </tr>
                     @endforeach
                 </table>
             </div>
 
-            
+
+          
+            <form action="{{ url('pokes') }}" method="POST" class="form-horizontal">
+                {{ csrf_field() }}     
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="poke" class="col-sm-3 control-label">Add Pokemon: </label>
+                        <input id="name" type="text" class="form-control" name="name"}}" >
+                        <button type="submit" class="btn btn-default">
+                            <i class="fa fa-plus"></i> Add
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            @if (Session::has('message'))
+                <div>{{Session::get('message')}}</div>
+            @endif
+
         </div>
     </div>
 </div>
