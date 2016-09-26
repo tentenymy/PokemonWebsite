@@ -1,93 +1,47 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-                <div class="panel-body">
-                    {{ Auth::user()->name }}, You are logged in!
-                </div>
-            </div>
-
-            <div>
-        
-                <form action="{{ url('trainers/'.$user->id) }}" method="POST" class="form-horizontal">
-                {{ csrf_field() }}   
-                {{ method_field('PUT') }}  
-                	<input type="hidden" name="_method" value="PUT">
-	                <div class="form-group">
-	                    <div class="col-sm-6">
-	                        <label for="name" class="col-sm-3 control-label">Name: </label>
-	                        <input id="name" type="text" class="form-control" name="name" value = "{{$user->name}}" >
-	                    </div>
-
-	                    <div class="col-sm-6">
-	                        <label for="email" class="col-sm-3 control-label">Email: </label>
-	                        <input id="email" type="email" class="form-control" name="email" value = "{{$user->email}}" >
-	                    </div>
-
-	                    
-                        @foreach($user->trainers as $trainer)
-                            @if(!empty($trainer->hometown))
-	                            <div class="col-sm-6">
-			                        <label for="hometown" class="col-sm-3 control-label">Hometown: </label>
-	                                <input id="hometown" type="text" class="form-control" name="hometown" value = "{{ $trainer->hometown }}" >
-	                            </div>
-	                            <div>
-	                                <label for="pokemon" class="col-sm-3 control-label">Pokemon: </label>
-	                                <select id = "poke_id" name = "poke_id">
-	                                	@if($trainer->poke->id)
-	                                		<option selected = "selected" value = "{{$trainer->poke->id}}">{{$trainer->poke->name}}</option>
-	                                	@else
-	                                		<option selected = "selected" value = "">N/A</option>
-	                                	@endif
-	                                	@foreach($pokes as $poke)
-	                                		@if($poke != $trainer->poke)
-	                                			<option value = "{{$poke->id}}">{{$poke->name}}</option>
-	                                		@endif
-	                                	@endforeach
-	                                </select>
-	                            </div>
-                            @else
-                                <div class="col-sm-6">
-			                        <label for="hometown" class="col-sm-3 control-label">Hometown: </label>
-	                                <input id="hometown" type="text" class="form-control" name="hometown" value = "N/A" >
-	                            </div>
-	                            <div>
-	                                <label for="pokemon" class="col-sm-3 control-label">Pokemon: </label>
-	                                <select id = "poke_id" name = "poke_id">
-	                                	<option selected = "selected" value = "">N/A</option>
-	                                	@foreach($pokes as $poke)
-	                                		<option value = "{{$poke->id}}">{{$poke->name}}</option>
-	                                	@endforeach
-	                                </select>
-	                            </div>
-                            @endif
-                            @break
-                        @endforeach
-	                        
-	                    </div>
-
-	                    <div>
-	                    	<button type="submit" class="btn btn-default">
-	                            <i class="fa fa-plus"></i> Edit
-	                        </button>
-	                    </div>
-	                </div>
-	            </form>
-            	
-            </div>
-
-            
-
-            @if (Session::has('message'))
-                <div>{{Session::get('message')}}</div>
-            @endif
-            
-
+	<div class="row">
+        <div class="col-md-8">
+            <h3>Edit My Profile</h3>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            {!! Form::open(['url' => 'trainers/'.$user->id, 'method' => 'put']) !!}
+            <ul class="list-group">
+            	<!-- Name -->
+	            <li class="list-group-item">
+		            {!! Form::label('name', 'Name: ') !!}
+		            {!! Form::text('name', $user->name) !!}
+	            </li>
+	            <!-- Email -->
+	            <li class="list-group-item">
+	            	{!! Form::label('email', 'Email Address: ') !!}
+	            	{!! Form::email('email', $user->email, $attributes = []) !!}
+	            </li>
+	            <!-- Hometown -->
+	            <li class="list-group-item">
+	            	{!! Form::label('hometown', 'Hometown: ') !!}
+	            	@if(!empty($user->trainer->hometown))
+	            	{!! Form::text('hometown', $user->trainer->hometown) !!}
+	            	@else
+	            	{!! Form::text('hometown') !!}
+	           	@endif
+	            </li>
+	            <!-- Poke_id -->
+	            <li class="list-group-item"> 
+	            	@foreach($pokes as $poke)          	
+	            	<p>{!! Form::radio('poke_id', $poke->id) !!} {{$poke->name}}</p>
+	            	@endforeach
+	            </li>
+	            <!-- Submit -->
+	            <li class="list-group-item"> 
+	            	{!! Form::submit('Submit') !!}
+	            </li>
+            </ul>
+		    {!! Form::close() !!}
+		</div>
+	</div>
 </div>
 @endsection

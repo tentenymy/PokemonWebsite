@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poke extends Model
 {
-	protected $fillable = ['name'];
+	
+	protected $table = 'pokes';
     public function trainers() {
     	return $this->hasMany('App\Trainer');
     }

@@ -18,7 +18,8 @@ class PokesController extends Controller
 {
     public function index() {
     	$pokes = Poke::all();
-    	return view('pokes.index', compact('pokes'));
+        $trainers = Trainer::all();
+    	return view('pokes.index', compact('pokes', 'trainers'));
     }
 
     public function create() {
@@ -28,26 +29,22 @@ class PokesController extends Controller
     public function store(Request $request) {
     	$duplicate = DB::table('pokes')->where('name', $request->name);
     	if ($duplicate->count() > 0) {
-    		Session::flash('message', 'This pokemon has been added!');
+    		Session::flash('message', 'Error: This pokemon has been added!');
     		return redirect('pokes');
     	}
     	DB::table('pokes')->insert(['name' => $request->name]);
         Session::flash('message', 'Created successfully!');
-
-        $poke = new Poke;
-        $poke->name = $request->name;
-        $poke->save();
-
     	return redirect('pokes');
     }
 
     public function destroy($id) {
-        DB::table('pokes')->where('id', $id)->delete();
-        Session::flash('message', $id . ' has been deleted!');
+        $poke = Poke::find($id);
+        $poke->delete();
+        Session::flash('message', $poke->name . ' has been deleted!');
         return redirect('pokes');
     }
 
-    public function show($id) {
+    /*public function show($id) {
         $poke = Poke::find($id);
         Session::flash('message', $id . ' is shown!');
         return view('pokes.show', compact('poke'));
@@ -63,5 +60,5 @@ class PokesController extends Controller
         DB::table('pokes')->where('id', $id)->update(['name' => $request->name]);
         Session::flash('message', 'Updated successfully!');
         return redirect('pokes/'.$id);
-    }
+    }*/
 }

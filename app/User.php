@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function trainers() {
-        return $this->hasMany('App\Trainer');
+    public function trainer() {
+        return $this->hasOne('App\Trainer');
     }
 }
