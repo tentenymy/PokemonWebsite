@@ -24,13 +24,13 @@
                     <!-- Name -->
                     <td>{{$user->name}}</td>
                     <!-- Hometown --> 
-                    @if(!empty($user->trainer)) 
+                    @if(!empty($user->trainer->hometown)) 
                     <td>{{$user->trainer->hometown}}</td>
                     @else
                     <td>N/A</td>
                     @endif
                     <!--Pokemon-->
-                    @if(!empty($user->trainer->poke))
+                    @if(!empty($user->trainer->poke->name))
                     <td>{{$user->trainer->poke->name}}</td>
                     @else
                     <td>N/A</td>

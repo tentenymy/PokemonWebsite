@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests;
-
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\User;
 use App\Trainer;
@@ -17,14 +17,20 @@ use Illuminate\Support\Facades\DB;
 class PokesController extends Controller
 {
     public function index() {
+        if (empty(Auth::user())) {
+            return redirect('errors');
+        }
+        if (!Auth::user()->isAdmin) {
+            return redirect('errors');
+        }
     	$pokes = Poke::all();
         $trainers = Trainer::all();
     	return view('pokes.index', compact('pokes', 'trainers'));
     }
 
-    public function create() {
+    /*public function create() {
     	return view('pokes.create');
-    }
+    }*/
 
     public function store(Request $request) {
     	$duplicate = DB::table('pokes')->where('name', $request->name);
