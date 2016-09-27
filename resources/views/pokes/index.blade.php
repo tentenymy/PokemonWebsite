@@ -2,28 +2,29 @@
 
 @section('content')
 <div class="container">
+
+    <!-- Pokemon Count -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Pokemon List</div>
-                <div class="panel-body">
-                    There are {{$trainers->count()}} Pokemons in the system
+                <div class="panel-heading">
+                    Pokemon List: There are <label>{{ $trainers->count() }}</label> Pokemons in the system
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Pokemon List -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <table class = "table">
                 <tr>
-                    <th>Poke_id</th>
-                    <th>Name</th>
+                    <th>Pokemon Name</th>
                     <th>Total</th>
                     <th>Action</th>
                 </tr>
                 @foreach($pokes as $poke)
                 <tr>
-                    <td>{{$poke->id}}</td>
                     <td>{{$poke->name}}</td>
                     <td>{{$poke->trainers->count()}}
                     <td>
@@ -36,6 +37,8 @@
             </table>
         </div>
     </div>
+
+    <!-- Add Pokemon -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class = "form-group">
@@ -47,6 +50,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Message -->
     <div class="row"
         <div class="col-md-8 col-md-offset-2">
             @if (Session::has('message'))

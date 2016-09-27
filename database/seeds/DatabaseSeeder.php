@@ -1,4 +1,10 @@
 <?php
+/** 
+ * @USC CSCI 577a HW02
+ * @Author: Meiyi Yang
+ * @Time: 09/23/2016
+ * @Desc: Add database seeder
+ */
 
 use Illuminate\Database\Seeder;
 

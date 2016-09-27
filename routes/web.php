@@ -12,15 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
+// Model 
 Route::resource('trainers', 'TrainersController');
 Route::resource('pokes', 'PokesController');
 
+// Auth
 Auth::routes();
 Route::get('/home', 'TrainersController@index');
 
+// Error
 Route::get('/errors', function() {
 	return view('errors.index');
+});
+
+// Message
+Route::get('/welcome', function () {
+    return view('welcome');
 });

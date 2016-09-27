@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 col-md-offset-2">
             <h3>My Profile</h3>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8">  
+        <div class="col-md-8 col-md-offset-2">
             <ul class="list-group">
                 <!-- Name -->
                 <li class="list-group-item">Name: {{ $user->name }}</li>
@@ -34,14 +34,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8"> 
+        <div class="col-md-8 col-md-offset-2">
             {!! Form::open(['url' => 'trainers/'.$user->id.'/edit', 'method' => 'get']) !!}
             {!! Form::submit('Edit') !!}
             {!! Form::close() !!}
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8"> 
+        <div class="col-md-8 col-md-offset-2">
             @if (Session::has('message'))
             <div style="color:red">{{Session::get('message')}}</div>
             @endif

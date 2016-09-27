@@ -75,15 +75,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Software Engineering: HW2
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="col-md-8 col-md-offset-2">
+                    <h2>Homework 2</h2>
+                    <h2>Meiyi Yang</h2>
+                    <h2>USC ID: 6761040585</h2>
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ 'Home' }}
                 </a>
             </div>
 
@@ -57,6 +57,7 @@
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
+                            <!-- drop down -->
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -76,6 +77,16 @@
     </nav>
 
     @yield('content')
+
+    <footer>
+        <div class = "container">
+            <div class = "row">
+                <div class = "col-md-8">
+                    <span class = "copyright">Copyright &copy; USC CSCI577a2016 Meiyi Yang</span>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="{{asset('/js/app.js')}}"></script>
