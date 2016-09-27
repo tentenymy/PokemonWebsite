@@ -58,16 +58,12 @@ class TrainersController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'poke_id' => 'required',
         ]);
         if ($validator->fails()) {
             Session::flash('message', 'Error: fail to update');
             return redirect('trainers/'.$id);
         }
-        if(empty(Poke::find($request->poke_id))) {
-            Session::flash('message', 'Error: pokemon is not exist in the pokemon list');
-            return redirect('trainers/'.$id);
-        }
+        // Unique email (except if your edit your own email)
         $user = User::find($id);
         if ($request->email != $user->email && !empty(User::where('email', $request->email))) {
             Session::flash('message', 'Error: email is not unique');
@@ -77,9 +73,9 @@ class TrainersController extends Controller
         // Update database
         DB::table('users')->where('id', $id)->update(['name' => $request->name, 'email' => $request->email]);
         if (!empty($user->trainer)) {
-        	DB::table('trainers')->where('user_id', $id)->update(['hometown' => $request->hometown, 'poke_id' => $request->poke_id]);
+        	DB::table('trainers')->where('user_id', $id)->update(['hometown' => $request->hometown]);
         } else {
-            DB::table('trainers')->insert(['user_id' => $id, 'hometown' => $request->hometown, 'poke_id' => $request->poke_id]);
+            DB::table('trainers')->insert(['user_id' => $id, 'hometown' => $request->hometown]);
         }
         Session::flash('message', 'Updated successfully!');
         return redirect('trainers/'.$id);

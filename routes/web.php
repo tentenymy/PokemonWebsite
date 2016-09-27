@@ -18,6 +18,7 @@ Route::get('/', function () {
 // Model 
 Route::resource('trainers', 'TrainersController');
 Route::resource('pokes', 'PokesController');
+Route::resource('trainer.poke_trainer', 'PokeTrainerController');
 
 // Auth
 Auth::routes();

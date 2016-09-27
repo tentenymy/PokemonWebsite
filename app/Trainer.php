@@ -15,7 +15,7 @@ class Trainer extends Model
     	return $this->hasOne('App\User');
     }
 
-    public function poke() {
-    	return $this->belongsTo('App\Poke');
+    public function pokes() {
+    	return $this->belongsToMany('App\Poke');
     }
 }

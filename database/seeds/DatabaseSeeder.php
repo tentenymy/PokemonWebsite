@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call('PokesSeeder');
         $this->call('UsersSeeder');
         $this->call('TrainersSeeder');
+        $this->call('TrainerPokeSeeder');
     }
 }

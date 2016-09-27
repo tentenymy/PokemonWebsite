@@ -35,14 +35,18 @@ class PokesController extends Controller
         // Send parameter
     	$pokes = Poke::all();
         $trainers = Trainer::all();
-    	return view('pokes.index', compact('pokes', 'trainers'));
+        $count = 0;
+        foreach ($trainers as $trainer) {
+            $count += $trainer->pokes->count();
+        }
+    	return view('pokes.index', compact('pokes', 'trainers', 'count'));
     }
 
     // Add Pokemon Action
     public function store(Request $request) {
         // Validate poke->name
-    	$duplicate = DB::table('pokes')->where('name', $request->name);
-    	if ($duplicate->count() > 0) {
+        $count = Poke::where('name', $request->name)->count();
+    	if ($count > 0) {
     		Session::flash('message', 'Error: This pokemon has been added!');
     		return redirect('pokes');
     	}
@@ -60,8 +64,7 @@ class PokesController extends Controller
             Session::flash('message', $poke->name . ' has been deleted!');
         } else {
             Session::flash('message', 'Error: This pokemon does not exist');
-        }
-        
+        }        
         return redirect('pokes');
     }
 }

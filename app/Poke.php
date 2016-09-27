@@ -12,6 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 class Poke extends Model
 {
     public function trainers() {
-    	return $this->hasMany('App\Trainer');
+    	return $this->belongsToMany('App\Trainer');
     }
 }

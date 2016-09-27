@@ -7,6 +7,7 @@
             <h3>My Profile</h3>
         </div>
     </div>
+    <!-- Profile -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <ul class="list-group">
@@ -20,12 +21,14 @@
                 @else
                 <li class="list-group-item">Hometown: N/A</li>
                 @endif
-                <!-- Pokemon -->
-                @if (!empty($user->trainer->poke->name))
-                <li class="list-group-item">Pokemon: {{$user->trainer->poke->name}}</li>
-                @else
-                <li class="list-group-item">Pokemon: N/A</li>
-                @endif
+                <!-- Pokemon Count -->
+                <li class="list-group-item">Total Pokemon: {{$user->trainer->pokes->count()}}</li>
+                <!-- Pokemon Name -->
+                <li class="list-group-item">Pokemon: 
+                    @foreach($user->trainer->pokes as $poke)
+                    <p>{{ $poke->name }}</p>
+                    @endforeach
+                </li>
                 <!-- Show if no profile -->
                 @if (empty($user->trainer))
                 <li class="list-group-item" style="color:red">You does not have a profile yet.</li>
@@ -33,6 +36,8 @@
             </ul>
         </div>
     </div>
+
+    <!-- Edit button -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             {!! Form::open(['url' => 'trainers/'.$user->id.'/edit', 'method' => 'get']) !!}
@@ -40,6 +45,8 @@
             {!! Form::close() !!}
         </div>
     </div>
+
+    <!-- Message -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @if (Session::has('message'))

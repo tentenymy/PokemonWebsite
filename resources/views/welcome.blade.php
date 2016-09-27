@@ -73,6 +73,7 @@
                 </div>
             @endif
 
+            <!-- Information -->
             <div class="content">
                 <div class="title m-b-md">
                     Software Engineering: HW2

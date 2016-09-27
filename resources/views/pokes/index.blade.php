@@ -8,7 +8,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Pokemon List: There are <label>{{ $trainers->count() }}</label> Pokemons in the system
+                    Pokemon List: There are <label>{{ $count }}</label> Pokemons in the system
                 </div>
             </div>
         </div>

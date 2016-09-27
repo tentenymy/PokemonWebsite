@@ -7,13 +7,15 @@
             <h3>Pokemon Trainers</h3>
         </div>
     </div>
+    <!-- Trainer Table -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <table class = "table">
                 <tr>
                     <th>Name</th>
                     <th>Hometown</th>
-                    <th>Pokemon</th>
+                    <th>Pokemon Number</th>
+                    <th>Pokemon Name</th>
                     <th>Admin</th>
                     @if(Auth::user()->isAdmin)
                     <th>Action</th>
@@ -29,12 +31,14 @@
                     @else
                     <td>N/A</td>
                     @endif
-                    <!--Pokemon-->
-                    @if(!empty($user->trainer->poke->name))
-                    <td>{{$user->trainer->poke->name}}</td>
-                    @else
-                    <td>N/A</td>
-                    @endif
+                    <!--Pokemon Number-->
+                    <td>{{ $user->trainer->pokes->count() }}</td>
+                    <!-- Pokemon Name -->
+                    <td>
+                    @foreach($user->trainer->pokes as $poke)
+                    <li>{{ $poke->name }}</li>
+                    @endforeach
+                    </td>
                     <!-- Admin -->
                     @if($user->isAdmin)
                     <td>Yes</td>

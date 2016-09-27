@@ -18,10 +18,7 @@ class CreateTrainersTable extends Migration
             $table->increments('id');
             $table->string('hometown')->default('');
             $table->integer('user_id')->unsigned();
-            $table->integer('poke_id')->unsigned();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('poke_id')->references('id')->on('pokes')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

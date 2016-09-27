@@ -6,6 +6,8 @@
             <h3>Edit My Profile</h3>
         </div>
     </div>
+
+    <!-- Profile Form -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             {!! Form::open(['url' => 'trainers/'.$user->id, 'method' => 'put']) !!}
@@ -29,23 +31,26 @@
 	            	{!! Form::text('hometown') !!}
 	           	@endif
 	            </li>
-	            <!-- Poke_id -->
-	            <li class="list-group-item"> 
-	            	@foreach($pokes as $poke)
-	            	@if($poke->id == $user->trainer->poke_id)
-	            	<p>{!! Form::radio('poke_id', $poke->id, true) !!} {{$poke->name}}</p> 
-	            	@else       	
-	            	<p>{!! Form::radio('poke_id', $poke->id) !!} {{$poke->name}}</p>
-	            	@endif
-	            	@endforeach
-	            </li>
 	            <!-- Submit -->
 	            <li class="list-group-item"> 
 	            	{!! Form::submit('Submit') !!}
 	            </li>
             </ul>
 		    {!! Form::close() !!}
-		</div>
-	</div>
+
+    <!-- Add Poke_Trainer -->
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            {!! Form::open(['url' => 'trainer/'.$user->id.'/poke_trainer']) !!}
+            {!! Form::label('poke', 'Add Pokemon:') !!}
+            <ul class="list-group">
+            	@foreach($pokes as $poke)
+            	<li class="list-group-item">{!! Form::radio('poke_id', $poke->id) !!} {{$poke->name}}</li>
+            	@endforeach
+            </ul>
+            {!! Form::submit('Add') !!}
+            {!! Form::close() !!}
+        </div>
+    </div>
 </div>
 @endsection
