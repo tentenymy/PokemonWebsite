@@ -1,3 +1,11 @@
+# Pokemon Management System
+
+This is a homework for CSCI577a: use Laravel framework to build a pokemon management website. <br>
+
+
+
+
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
